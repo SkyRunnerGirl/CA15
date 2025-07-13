@@ -3,12 +3,11 @@ import { useState } from "react";
 
 type CalendarProps = {
     appointments: Array<{ id: number, day: string, time: string, text: string }>
-    isSelected: boolean
-    onSelected: (id: number) => void
     deleteAppointment: (id: number) => void
+    updateAppointment: (id: number, text: string) => void
 }
 
-export default function Calendar( {appointments, isSelected, onSelected, deleteAppointment}: CalendarProps ) {
+export default function Calendar( {appointments, deleteAppointment, updateAppointment}: CalendarProps ) {
   const [selectedApptId, setSelectedApptId] = useState(0)
 
   const handleApptClick = (id: number) => {
@@ -28,7 +27,8 @@ export default function Calendar( {appointments, isSelected, onSelected, deleteA
             text={appt.text} 
             onSelected={handleApptClick} 
             isSelected={appt.id === selectedApptId} 
-            deleteAppointment={deleteAppointment} 
+            deleteAppointment={deleteAppointment}
+            updateAppointment={updateAppointment}
           />
         ))}
     </div>

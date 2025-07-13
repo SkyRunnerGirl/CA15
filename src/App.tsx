@@ -21,6 +21,10 @@ export default function App() {
     setAppointments( appointments.filter( appt => appt.id !== idToDelete ) )
   }
 
+  const updateAppointment = (idToUpdate: number, newText: string) => {
+    setAppointments( appointments.map( appt => ( appt.id !== idToUpdate ? appt : {...appt, text: newText} ) ) )
+  }
+
   return (
   <div>
     <h1 className="text-center m-2 p-2">Calendar App</h1>
@@ -30,6 +34,7 @@ export default function App() {
     <Calendar 
       appointments={appointments} 
       deleteAppointment={deleteAppointment}
+      updateAppointment={updateAppointment}
     />
   </div>
   )

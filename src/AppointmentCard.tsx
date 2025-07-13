@@ -7,9 +7,18 @@ type ApptCardProps = {
     isSelected: boolean,
     onSelected: (id: number) => void
     deleteAppointment: (id: number) => void
+    updateAppointment: (id: number, text: string) => void
 }
 
-export default function AppointmentCard({ id, day, time, text, isSelected, onSelected, deleteAppointment}: ApptCardProps) {
+export default function AppointmentCard({ id, day, time, text, isSelected, onSelected, deleteAppointment, updateAppointment}: ApptCardProps) {
+
+  const handleUpdate = () => {
+    const updatedApptText = prompt("Add New Appointment Details:")
+    if (updatedApptText)
+      updateAppointment(id, updatedApptText)
+      console.log(updatedApptText)
+  }
+
   return (
     <div 
       onClick = { () => onSelected(id)}
@@ -20,7 +29,10 @@ export default function AppointmentCard({ id, day, time, text, isSelected, onSel
           {text}
         </p>
         <div className="d-flex gap-3 m-0 p-0">
-            <button className="btn btn-primary btn-sm">Update</button>
+            <button 
+              className="btn btn-primary btn-sm"
+              onClick={ () => handleUpdate()}
+            >Update</button>
             <button className="btn btn-danger btn-sm" onClick={() => deleteAppointment(id)}>Delete</button>
         </div>
       </div>
